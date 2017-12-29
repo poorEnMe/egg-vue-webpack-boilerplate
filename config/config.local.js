@@ -20,6 +20,8 @@ module.exports = app => {
     injectCss: false
   };
 
+
+
   const localIP = ip.address();
   const domainWhiteList = [];
   [7001, 9000, 9001].forEach(port => {

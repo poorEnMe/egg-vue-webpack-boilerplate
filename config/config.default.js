@@ -1,5 +1,7 @@
 const path = require('path');
 const fs = require('fs');
+const config = require('./env.config')
+
 module.exports = app => {
   const exports = {};
 
@@ -20,6 +22,21 @@ module.exports = app => {
     dir: path.join(app.baseDir, 'logs')
   };
 
+  exports.security = {
+    csrf: {
+      enable: false,
+    }
+  };
+
+  exports.sequelize = {
+    dialect: 'mysql',
+    database: config.database.nameDB,
+    host: config.database.hostDB,
+    port: config.database.port,
+    username: config.database.userDB,
+    password: config.database.passDB
+  };
+
   exports.static = {
     prefix: '/public/',
     dir: path.join(app.baseDir, 'public')
@@ -27,9 +44,7 @@ module.exports = app => {
 
   exports.keys = '123456';
 
-  exports.middleware = [
-    'access'
-  ];
+  exports.middleware = [];
 
   return exports;
 };
